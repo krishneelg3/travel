@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trip Itinerary & Expenses</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #FDFDFD;
+    color: #111;
+    line-height: 1.6;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 40px;
+  }
+
+  h1, h2 {
+    color: #0a3d62;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    border-bottom: 2px solid #0a3d62;
+    padding-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+  }
+
+  /* Itinerary Section */
+  section.itinerary {
+    margin-bottom: 40px;
+  }
+
+  ul.itinerary-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    border: 1px solid #d0d7e2;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  ul.itinerary-list li {
+    padding: 16px 24px;
+    border-bottom: 1px solid #d0d7e2;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    cursor: default;
+  }
+
+  ul.itinerary-list li:last-child {
+    border-bottom: none;
+  }
+
+  ul.itinerary-list li strong {
+    color: #0a3d62;
+  }
+
+  ul.itinerary-list li:hover {
+    background-color: #e1e8ff;
+  }
+
+  /* Location list */
+  ul.location-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  ul.location-list li {
+    background: #fff;
+    border: 1px solid #d0d7e2;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: #0a3d62;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+    user-select: none;
+  }
+
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+    table-layout: fixed;
+    background: #fff;
+    border: 1px solid #d0d7e2;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.05);
+  }
+
+  thead {
+    background: #0a3d62;
+    color: #fff;
+  }
+
+  th, td {
+    padding: 14px 20px;
+    text-align: center;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  th {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f9faff;
+  }
+
+  tbody tr:hover {
+    background: #e1e8ff;
+  }
+
+  td[data-label="Name"] {
+    text-align: left;
+    font-weight: 600;
+    color: #0a3d62;
+  }
+
+  td[data-label="Total"] strong {
+    color: #1e40af;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive for smaller screens */
+  @media (max-width: 900px) {
+    main {
+      padding: 0 20px;
+    }
+    table {
+      min-width: 700px;
+    }
+  }
+
+  .note {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Trip Itinerary & Expenses</h1>
+
+  <section class="itinerary">
+    <h2>Itinerary Overview</h2>
+    <ul class="itinerary-list">
+      <li><strong>Friday 20th June (Midday)</strong> - Depart Auckland and travel to Taupo (~3 hrs drive)</li>
+      <li><strong>Friday Evening</strong> - Check into Airbnb, have dinner and relax</li>
+      <li><strong>Saturday 21st June (Morning)</strong> - Early departure for Mt Ruapehu (90 min drive from Taupo)</li>
+      <li><strong>Saturday 21st June (Day)</strong> - Skiing and snowboarding at Mt Ruapehu</li>
+      <li><strong>Saturday 21st June (Evening)</strong> - Return to Taupo, dinner and overnight stay</li>
+      <li><strong>Sunday 22nd June (Morning)</strong> - Travel to Rotorua (~1 hr 30 min drive)</li>
+      <li><strong>Sunday 22nd June (Day)</strong> - Rotorua Skyline Luge experience</li>
+      <li><strong>Sunday 22nd June (Afternoon)</strong> - Depart back to Auckland</li>
+    </ul>
+
+    <h2>Locations</h2>
+    <ul class="location-list">
+      <li>Airbnb: <a href="https://www.airbnb.co.nz/rooms/1422795689174668134" target="_blank" rel="noopener" style="color:#0a3d62; text-decoration:underline;">Link</a></li>
+      <li>Mt Ruapehu</li>
+      <li>Pauly's Diner (Taupo)</li>
+      <li>Rotorua Skyline Luge</li>
+      <li>Desert Road</li>
+    </ul>
+  </section>
+
+  <section class="expenses">
+    <h2>Expense Breakdown (NZD)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Mt Ruapehu</th>
+          <th>Gear Rental</th>
+          <th>Rotorua Skyline</th>
+          <th>Airbnb</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Name">Krish</td>
+          <td data-label="Mt Ruapehu">$159</td>
+          <td data-label="Gear Rental">$54</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$377.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Anson</td>
+          <td data-label="Mt Ruapehu">$159</td>
+          <td data-label="Gear Rental">$0</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$323.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Kai</td>
+          <td data-label="Mt Ruapehu">$159</td>
+          <td data-label="Gear Rental">$54</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$377.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Jess</td>
+          <td data-label="Mt Ruapehu">$0</td>
+          <td data-label="Gear Rental">$0</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$164.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Jimmy</td>
+          <td data-label="Mt Ruapehu">$159</td>
+          <td data-label="Gear Rental">$0</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$323.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Keisha</td>
+          <td data-label="Mt Ruapehu">$0</td>
+          <td data-label="Gear Rental">$0</td>
+          <td data-label="Rotorua Skyline">$93</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$164.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Zane</td>
+          <td data-label="Mt Ruapehu">-</td>
+          <td data-label="Gear Rental">-</td>
+          <td data-label="Rotorua Skyline">-</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$71.50</strong></td>
+        </tr>
+        <tr>
+          <td data-label="Name">Olivia</td>
+          <td data-label="Mt Ruapehu">-</td>
+          <td data-label="Gear Rental">-</td>
+          <td data-label="Rotorua Skyline">-</td>
+          <td data-label="Airbnb">$71.50</td>
+          <td data-label="Total"><strong>$71.50</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">* Prices are in NZD</p>
+  </section>
+</main>
+</body>
+</html>
