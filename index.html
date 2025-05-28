@@ -3,235 +3,188 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Trip Itinerary & Expenses</title>
+<title>Trip Itinerary & Expense Breakdown</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
+  /* Reset & base */
   body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FDFDFD;
     color: #111;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
-
   main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 16px;
   }
-
   h1, h2 {
-    color: #0a3d62;
-    font-weight: 600;
-    margin-bottom: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
   }
-
   h1 {
     font-size: 2.4rem;
-    border-bottom: 2px solid #0a3d62;
-    padding-bottom: 8px;
   }
-
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #0a66c2;
+    padding-bottom: 4px;
     margin-top: 40px;
   }
-
-  /* Itinerary Section */
-  section.itinerary {
-    margin-bottom: 40px;
+  p {
+    margin: 0 0 16px;
   }
-
-  ul.itinerary-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    border: 1px solid #d0d7e2;
-    border-radius: 6px;
-    overflow: hidden;
+  
+  /* Itinerary Styles */
+  .itinerary-section {
     background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgb(10 102 194 / 0.15);
+    padding: 24px;
+    margin-top: 24px;
+    transition: box-shadow 0.3s ease;
   }
-
-  ul.itinerary-list li {
-    padding: 16px 24px;
-    border-bottom: 1px solid #d0d7e2;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+  .itinerary-section:hover {
+    box-shadow: 0 0 20px rgb(10 102 194 / 0.35);
+  }
+  .itinerary-item {
+    margin-bottom: 18px;
+    padding: 14px 20px;
+    border-left: 4px solid #0a66c2;
+    background-color: #f5faff;
+    border-radius: 4px;
     cursor: default;
+    transition: background-color 0.3s ease;
   }
-
-  ul.itinerary-list li:last-child {
-    border-bottom: none;
+  .itinerary-item:hover {
+    background-color: #e2eefe;
   }
-
-  ul.itinerary-list li strong {
-    color: #0a3d62;
+  .itinerary-item strong {
+    color: #0a66c2;
   }
-
-  ul.itinerary-list li:hover {
-    background-color: #e1e8ff;
-  }
-
-  /* Location list */
-  ul.location-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 16px;
+  
+  /* Locations List */
+  .locations {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #444;
   }
-
-  ul.location-list li {
-    background: #fff;
-    border: 1px solid #d0d7e2;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-weight: 600;
-    color: #0a3d62;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+  .locations span {
+    background: #e7f0ff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #a6c8ff;
+    color: #0a66c2;
     user-select: none;
-    flex-shrink: 0;
   }
 
-  ul.location-list li a {
-    color: #0a3d62;
-    text-decoration: underline;
-    word-break: break-word;
-  }
-
-  /* Table Styling */
+  /* Table Wrapper with scroll and visual scroll cue */
   .table-wrapper {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-    margin-top: 16px;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 24px;
+    position: relative;
   }
 
+  /* Scroll fade gradient on right to indicate scroll */
+  .table-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 48px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to left, rgba(10,102,194,0.2), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  /* Hide scroll cue if no overflow (desktop) */
+  @media (min-width: 900px) {
+    .table-wrapper::after {
+      display: none;
+    }
+  }
+
+  /* Expense Table Styles */
   table {
-    width: 100%;
     border-collapse: collapse;
-    min-width: 850px;
-    table-layout: fixed;
+    width: 850px; /* fixed width for desktop and scroll */
+    max-width: 100%;
     background: #fff;
     border: 1px solid #d0d7e2;
     border-radius: 6px;
-    overflow: hidden;
     box-shadow: 0 1px 5px rgb(0 0 0 / 0.05);
+    table-layout: fixed;
   }
-
-  thead {
-    background: #0a3d62;
-    color: #fff;
+  thead tr {
+    background-color: #0a66c2;
+    color: white;
   }
-
   th, td {
-    padding: 14px 20px;
     text-align: center;
-    font-weight: 500;
+    padding: 14px 12px;
+    border-bottom: 1px solid #d0d7e2;
     word-wrap: break-word;
-    font-size: 0.95rem;
   }
-
-  th {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  tbody tr:nth-child(even) {
-    background: #f9faff;
-  }
-
-  tbody tr:hover {
-    background: #e1e8ff;
-  }
-
-  td[data-label="Name"] {
+  th:first-child, td:first-child {
     text-align: left;
-    font-weight: 600;
-    color: #0a3d62;
+    padding-left: 20px;
   }
-
-  td[data-label="Total"] strong {
-    color: #1e40af;
-    font-weight: 700;
-    font-size: 1.1rem;
+  tbody tr:hover {
+    background-color: #f5faff;
   }
-
-  /* Responsive adjustments */
-  @media (max-width: 900px) {
-    main {
-      padding: 0 16px;
+  td strong {
+    color: #0a66c2;
+  }
+  
+  /* Responsive text scaling */
+  @media (max-width: 500px) {
+    body {
+      font-size: 14px;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
     h2 {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    ul.itinerary-list li {
-      padding: 14px 16px;
-      font-size: 0.9rem;
-    }
-    ul.location-list li {
-      padding: 8px 12px;
-      font-size: 0.9rem;
+      font-size: 1.2rem;
     }
     th, td {
-      padding: 12px 10px;
-      font-size: 0.85rem;
+      padding: 10px 6px;
+    }
+    .itinerary-item {
+      padding: 12px 16px;
+      font-size: 0.95rem;
     }
   }
-
-  /* Make itinerary list items easier to tap on mobile */
-  ul.itinerary-list li {
-    border-radius: 4px;
-  }
-
-  ul.itinerary-list li:hover,
-  ul.itinerary-list li:focus {
-    background-color: #d6e0ff;
-    outline: none;
-  }
-
 </style>
 </head>
 <body>
 <main>
-  <h1>Trip Itinerary & Expenses</h1>
-
-  <section class="itinerary">
-    <h2>Itinerary Overview</h2>
-    <ul class="itinerary-list" tabindex="0">
-      <li><strong>Friday 20th June (Midday)</strong> - Depart Auckland and travel to Taupo (~3 hrs drive)</li>
-      <li><strong>Friday Evening</strong> - Check into Airbnb, have dinner and relax</li>
-      <li><strong>Saturday 21st June (Morning)</strong> - Early departure for Mt Ruapehu (90 min drive from Taupo)</li>
-      <li><strong>Saturday 21st June (Day)</strong> - Skiing and snowboarding at Mt Ruapehu</li>
-      <li><strong>Saturday 21st June (Evening)</strong> - Return to Taupo, dinner and overnight stay</li>
-      <li><strong>Sunday 22nd June (Morning)</strong> - Travel to Rotorua (~1 hr 30 min drive)</li>
-      <li><strong>Sunday 22nd June (Day)</strong> - Rotorua Skyline Luge experience</li>
-      <li><strong>Sunday 22nd June (Afternoon)</strong> - Depart back to Auckland</li>
-    </ul>
-
-    <h2>Locations</h2>
-    <ul class="location-list">
-      <li>Airbnb: <a href="https://www.airbnb.co.nz/rooms/1422795689174668134" target="_blank" rel="noopener">Link</a></li>
-      <li>Mt Ruapehu</li>
-      <li>Pauly's Diner (Taupo)</li>
-      <li>Rotorua Skyline Luge</li>
-      <li>Desert Road</li>
-    </ul>
+  <h1>Trip Itinerary & Expense Breakdown</h1>
+  
+  <section class="itinerary-section" aria-label="Itinerary">
+    <h2>Itinerary</h2>
+    <div class="itinerary-item"><strong>Friday, 20 June:</strong> Leave Auckland midday, travel to Taupo, check into Airbnb, have food, and sleep.</div>
+    <div class="itinerary-item"><strong>Saturday, 21 June:</strong> Early morning drive (~90 mins) to Mt Ruapehu. Ski & snowboard day. Evening return to Taupo for dinner and rest.</div>
+    <div class="itinerary-item"><strong>Sunday, 22 June:</strong> Morning drive to Rotorua for Skyline Luge. Afterward, return to Auckland.</div>
+    <div class="locations" aria-label="Locations">
+      <span>Airbnb: Taupo</span>
+      <span>Mountain: Mt Ruapehu</span>
+      <span>Pauly's Diner: Taupo</span>
+      <span>Rotorua Luge: Skyline Rotorua</span>
+      <span>Desert Road</span>
+    </div>
   </section>
 
-  <section class="expenses">
-    <h2>Expense Breakdown (NZD)</h2>
-    <div class="table-wrapper" role="region" aria-label="Expense Breakdown Table">
+  <section aria-label="Expense Breakdown">
+    <h2>Expense Breakdown</h2>
+    <div class="table-wrapper" role="region" aria-label="Expense breakdown table with horizontal scroll on small screens">
       <table>
         <thead>
           <tr>
